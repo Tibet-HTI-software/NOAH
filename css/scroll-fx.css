@@ -1,0 +1,85 @@
+/* ==========================================================================
+   NOAH — Subtiele scroll-effecten
+   Geïnspireerd op delamo: hero die vervaagt, parallax-achtergronden en een
+   kleurovergang naar het groene vlak. Gebouwd met native CSS scroll-driven
+   animations (Chrome/Edge). Valt netjes terug op statisch in andere browsers
+   en wordt uitgeschakeld bij 'prefers-reduced-motion'.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+
+    /* ---- 1. HERO: content vervaagt + schuift weg bij uitscrollen -------- */
+    .hero { view-timeline-name: --hero; }
+
+    .hero__inner {
+      animation: heroFade linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 85%;
+      will-change: opacity, transform;
+    }
+    @keyframes heroFade {
+      to { opacity: 0; transform: translateY(-34px); }
+    }
+
+    /* ---- 2. HERO: parallax op de achtergrondfoto (beweegt trager) ------- */
+    .hero__bg img {
+      animation: heroParallax linear both;
+      animation-timeline: --hero;
+      animation-range: entry 0% exit 100%;
+      will-change: transform;
+    }
+    @keyframes heroParallax {
+      from { transform: translateY(-3%) scale(1.06); }
+      to   { transform: translateY(9%)  scale(1.14); }
+    }
+
+    /* scroll-hint vervaagt mee */
+    .hero__scroll {
+      animation: heroFade linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 40%;
+    }
+
+    /* ---- 3. CTA-banner: parallax op de achtergrondfoto ----------------- */
+    .cta-banner { view-timeline-name: --cta; }
+    .cta-banner__bg img {
+      animation: bannerParallax linear both;
+      animation-timeline: --cta;
+      animation-range: cover 0% cover 100%;
+      will-change: transform;
+    }
+    @keyframes bannerParallax {
+      from { transform: translateY(-8%) scale(1.12); }
+      to   { transform: translateY(8%)  scale(1.12); }
+    }
+
+    /* ---- 4. Groen realisatie-vlak: off-white "gordijn" wipet weg -------- */
+    .realisaties-cta { position: relative; view-timeline-name: --realisaties; }
+    .realisaties-cta > .container { position: relative; z-index: 1; }
+    .realisaties-cta::before {
+      content: "";
+      position: absolute; inset: 0; z-index: 0;
+      background: var(--bg);
+      transform-origin: top;
+      animation: curtainUp linear both;
+      animation-timeline: --realisaties;
+      animation-range: cover 0% cover 38%;
+    }
+    @keyframes curtainUp {
+      from { transform: scaleY(1); }
+      to   { transform: scaleY(0); }
+    }
+
+    /* ---- 5. Dienst-cards: lichte 'rise' op view (bovenop de reveal) ----- */
+    .diensten-grid .dienst-card {
+      animation: cardRise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+    @keyframes cardRise {
+      from { transform: translateY(26px); }
+      to   { transform: translateY(0); }
+    }
+  }
+}

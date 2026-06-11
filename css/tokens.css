@@ -1,0 +1,62 @@
+/* ==========================================================================
+   NOAH Isolatie & Renovatie — Design Tokens
+   Stijl-basis: delamo.be (clean, veel witruimte, rond display-font,
+   off-white canvas + één vol kleurvlak) — vertaald naar NOAH-groen.
+   ========================================================================== */
+
+:root {
+  /* ---- Kleuren -------------------------------------------------------- */
+  --bg:            #F4F4EF;   /* off-white canvas (zoals delamo)            */
+  --bg-soft:       #ECEDE6;   /* iets dieper voor afwisseling              */
+  --surface:       #FFFFFF;   /* cards / panelen                          */
+  --ink:           #14181A;   /* bijna-zwarte tekst                       */
+  --ink-soft:      #3A4046;   /* zachtere koptekst                        */
+  --muted:         #6B7280;   /* bijtekst / grijs                         */
+  --line:          #E2E2D9;   /* randen / scheidingslijnen               */
+
+  /* NOAH-groen (uit het logo: lime -> bosgroen) */
+  --green:         #16A34A;   /* primair                                 */
+  --green-600:     #15903F;
+  --green-700:     #137A37;
+  --green-deep:    #14532D;   /* bosgroen (donkere secties)              */
+  --lime:          #7AC74F;   /* lime accent uit logo                    */
+  --green-50:      #EAF6EE;   /* zachte groene tint (pills/labels)       */
+  --green-100:     #D6EEDD;
+
+  --on-green:      #FFFFFF;   /* tekst op groen vlak                     */
+
+  /* Verloop (logo-gevoel) */
+  --grad-green:    linear-gradient(135deg, var(--lime) 0%, var(--green) 55%, var(--green-deep) 100%);
+
+  /* ---- Typografie (zoals delamo: Comfortaa + Poppins) ------------------ */
+  --font-display:  'Comfortaa', system-ui, sans-serif;  /* rond, premium   */
+  --font-body:     'Poppins', system-ui, sans-serif;
+
+  --fs-hero:       clamp(2.6rem, 6vw, 5rem);
+  --fs-h1:         clamp(2.2rem, 4.6vw, 3.6rem);
+  --fs-h2:         clamp(1.8rem, 3.4vw, 2.8rem);
+  --fs-h3:         clamp(1.25rem, 2vw, 1.6rem);
+  --fs-lead:       clamp(1.05rem, 1.5vw, 1.3rem);
+  --fs-body:       1rem;
+  --fs-small:      0.875rem;
+  --fs-eyebrow:    0.75rem;
+
+  /* ---- Ruimte / layout ------------------------------------------------ */
+  --maxw:          1200px;
+  --gutter:        clamp(1.25rem, 4vw, 2.5rem);
+  --section-y:     clamp(4rem, 9vw, 8rem);
+  --radius:        18px;
+  --radius-lg:     26px;
+  --radius-pill:   999px;
+
+  /* ---- Schaduw / effecten -------------------------------------------- */
+  --shadow-sm:     0 2px 10px rgba(20, 24, 26, .06);
+  --shadow:        0 14px 40px rgba(20, 24, 26, .10);
+  --shadow-green:  0 16px 40px rgba(22, 163, 74, .22);
+
+  --ease:          cubic-bezier(.22, .61, .36, 1);
+  --t-fast:        .2s var(--ease);
+  --t:             .35s var(--ease);
+
+  --header-h:      78px;
+}
