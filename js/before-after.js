@@ -11,6 +11,7 @@
       before.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
       handle.style.left = pct + "%";
       ba.setAttribute("aria-valuenow", Math.round(pct));
+      ba.setAttribute("aria-valuetext", `${Math.round(pct)}% van de voor-situatie zichtbaar`);
     };
     const fromEvent = (clientX) => {
       const r = ba.getBoundingClientRect();

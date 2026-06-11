@@ -185,7 +185,7 @@ h1, h2, h3, h4 {
    DIENSTEN (delamo product-cards: foto + label)
    ========================================================================== */
 .section-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
-.section-head h2 { font-size: var(--fs-h2); max-width: 18ch; }
+.section-head h2 { font-size: var(--fs-h2); max-width: 18ch; letter-spacing: -.025em; }
 .section-head p { max-width: 42ch; color: var(--muted); }
 
 .diensten-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1rem, 2vw, 1.5rem); }
@@ -212,6 +212,10 @@ h1, h2, h3, h4 {
 .dienst-card:hover .dienst-card__img img { transform: scale(1.06); }
 .dienst-card:hover .dienst-card__cta { opacity:1; transform: translateY(0); }
 .dienst-card:hover { box-shadow: var(--shadow); }
+/* op touch-toestellen is er geen hover: CTA altijd tonen */
+@media (hover: none) {
+  .dienst-card__cta { opacity: 1; transform: none; }
+}
 
 /* ==========================================================================
    WAAROM NOAH (USP)
@@ -286,18 +290,26 @@ h1, h2, h3, h4 {
 .footer__bottom nav a { font-family: var(--font-display); font-weight: 600; color: var(--ink-soft); font-size: .88rem; }
 .footer__legal { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.1rem; border-top: 1px solid var(--line); font-size: .8rem; color: var(--muted); }
 .footer__legal nav { display: flex; gap: 1.1rem; }
-.todo { color: #B45309; }  /* markeer placeholder-gegevens */
+.todo { color: var(--muted); }  /* placeholder-gegevens (neutraal in demo) */
 
 /* ==========================================================================
    Scroll-reveal
    ========================================================================== */
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-.reveal.is-visible { opacity: 1; transform: none; }
-.reveal[data-delay="1"] { transition-delay: .08s; }
-.reveal[data-delay="2"] { transition-delay: .16s; }
-.reveal[data-delay="3"] { transition-delay: .24s; }
+.reveal {
+  opacity: 0; transform: translateY(26px); filter: blur(3px);
+  /* opacity rustig, translate met lichte 'spring', blur scherpstellend */
+  transition: opacity .7s var(--ease),
+              transform .8s cubic-bezier(.34, 1.2, .64, 1),
+              filter .7s var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: none; filter: blur(0); }
+.reveal[data-delay="1"] { transition-delay: .12s; }
+.reveal[data-delay="2"] { transition-delay: .24s; }
+.reveal[data-delay="3"] { transition-delay: .36s; }
+/* kaarten landen met een subtiele schaal */
+.dienst-card.reveal, .project-card.reveal, .quote.reveal { transform: translateY(26px) scale(.97); }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
   html { scroll-behavior: auto; }
 }
 
@@ -374,7 +386,7 @@ h1, h2, h3, h4 {
 .compare__col li { display: flex; gap: .7rem; align-items: flex-start; margin-bottom: .85rem; color: var(--muted); }
 .compare__col li svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: .25rem; }
 .compare__col--std li svg { color: #C0504D; }
-.compare__col--noah { background: var(--green-deep); }
+.compare__col--noah { background: var(--green-700); }
 .compare__col--noah h3 { color: #fff; }
 .compare__col--noah li { color: rgba(255,255,255,.92); }
 .compare__col--noah li svg { color: var(--lime); }
@@ -431,11 +443,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .hero__row { display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(1.5rem, 4vw, 3rem); flex-wrap: wrap; }
 .hero__wordmark {
   font-family: var(--font-display); font-weight: 700;
-  font-size: clamp(3.6rem, 9vw, 7rem); line-height: .85; letter-spacing: -.03em;
+  font-size: clamp(4rem, 12vw, 9rem); line-height: .85; letter-spacing: -.03em;
   color: #fff;
 }
 .hero__wordmark .dot { color: var(--lime); }
-.hero__row .hero__lead { margin-top: 0; font-size: 1rem; max-width: 34ch; }
+.hero__row .hero__lead { margin-top: 0; font-size: 1.05rem; max-width: 42ch; }
 .hero__row .hero__actions { margin-top: 0; }
 
 /* ---- Gigantisch merk op de CTA-foto (zoals delamo) --------------------- */
@@ -517,3 +529,31 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   body { animation: pageIn .5s ease both; }
   @keyframes pageIn { from { opacity: 0; } }
 }
+
+/* ---- Trust-bar onder de hero -------------------------------------------- */
+.trust-bar { display: flex; flex-wrap: wrap; gap: clamp(1rem, 4vw, 3rem); align-items: center; padding-block: 1.1rem; border-bottom: 1px solid var(--line); }
+.trust-bar span { display: inline-flex; align-items: center; gap: .55rem; font-size: .92rem; font-weight: 600; color: var(--ink-soft); }
+.trust-bar svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; }
+
+/* ---- Sticky CTA-balk op mobiel ------------------------------------------ */
+.m-cta { display: none; }
+@media (max-width: 720px) {
+  .m-cta { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 88;
+    padding: .65rem var(--gutter) calc(.65rem + env(safe-area-inset-bottom));
+    background: rgba(244,244,239,.92); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+  .m-cta .btn { width: calc(100% - 64px); justify-content: center; }
+  /* zwevende knoppen boven de balk uit */
+  .wa-float { bottom: calc(4.6rem + env(safe-area-inset-bottom)); }
+  .to-top { bottom: calc(8.6rem + env(safe-area-inset-bottom)); }
+  body { padding-bottom: 64px; }
+}
+
+/* ---- Trust-items ín de hero (zichtbaar zonder te scrollen) -------------- */
+.trust-bar--hero { border-bottom: none; border-top: 1px solid rgba(255,255,255,.25); margin-top: clamp(1.25rem, 3vw, 2rem); padding-top: 1.1rem; padding-bottom: 0; }
+.trust-bar--hero span { color: rgba(255,255,255,.92); }
+.trust-bar--hero svg { color: var(--lime); }
+
+/* ---- Marquee-foto's klikbaar naar het juiste project -------------------- */
+a.marquee__item { cursor: pointer; }
+a.marquee__item img { transition: transform .5s var(--ease); }
+a.marquee__item:hover img { transform: scale(1.06); }

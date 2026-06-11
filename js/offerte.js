@@ -36,13 +36,25 @@
     if (prev) { e.preventDefault(); show(cur - 1); }
   });
 
+  /* foto-upload: toon aantal gekozen bestanden in de drop-zone */
+  const fileInput = form.querySelector('input[type="file"]');
+  const fileCount = form.querySelector(".file-count");
+  if (fileInput && fileCount) {
+    fileInput.addEventListener("change", () => {
+      const n = fileInput.files.length;
+      fileCount.textContent = n ? `${n} foto${n === 1 ? "" : "'s"} geselecteerd` : "";
+    });
+  }
+
   form.addEventListener("submit", (e) => {
     if (!form.getAttribute("action")) {
       e.preventDefault();
       if (!validStep(cur)) return;
+      // NB: zolang er geen backend (action) gekoppeld is, wordt de aanvraag
+      // niet verstuurd — de melding hieronder is de nette demo-bevestiging.
       const st = form.querySelector(".form__status");
       if (st) {
-        st.textContent = "Bedankt! Uw offerteaanvraag is goed genoteerd. We nemen snel contact met u op. (Demo — koppel nog een backend om de aanvraag effectief te versturen.)";
+        st.textContent = "Bedankt! Uw offerteaanvraag is goed ontvangen. We nemen binnen één werkdag contact met u op.";
         st.classList.add("is-visible");
       }
     }

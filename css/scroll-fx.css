@@ -71,15 +71,6 @@
       to   { transform: scaleY(0); }
     }
 
-    /* ---- 5. Dienst-cards: lichte 'rise' op view (bovenop de reveal) ----- */
-    .diensten-grid .dienst-card {
-      animation: cardRise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 60%;
-    }
-    @keyframes cardRise {
-      from { transform: translateY(26px); }
-      to   { transform: translateY(0); }
-    }
+    /* (cardRise verwijderd: conflicteerde met de .reveal-animatie op dezelfde kaarten) */
   }
 }

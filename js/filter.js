@@ -4,7 +4,13 @@
   const buttons = document.querySelectorAll(".filter-btn");
   const cards = document.querySelectorAll(".project-card");
   const empty = document.querySelector(".projects-empty");
+  const counter = document.querySelector(".projects-count");
   if (!buttons.length) return;
+
+  const setCount = (n) => {
+    if (counter) counter.textContent = `${n} realisatie${n === 1 ? "" : "s"}`;
+  };
+  setCount(cards.length);
 
   buttons.forEach((btn) =>
     btn.addEventListener("click", () => {
@@ -17,6 +23,7 @@
         card.classList.toggle("is-hidden", !match);
         if (match) visible++;
       });
+      setCount(visible);
       if (empty) empty.style.display = visible ? "none" : "block";
     })
   );

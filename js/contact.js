@@ -12,8 +12,10 @@
     // Demo-modus: nog geen backend gekoppeld -> toon bevestiging lokaal.
     if (!form.getAttribute("action")) {
       e.preventDefault();
+      // NB: zolang er geen backend (action) gekoppeld is, wordt de mail niet
+      // verstuurd — de melding hieronder is de nette demo-bevestiging.
       if (status) {
-        status.textContent = "Bedankt! Uw aanvraag is genoteerd. (Demo — koppel nog een backend om de mail effectief te versturen.)";
+        status.textContent = "Bedankt voor uw bericht! We antwoorden binnen één werkdag.";
         status.classList.add("is-visible");
       }
       form.reset();

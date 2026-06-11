@@ -29,6 +29,18 @@
   }
 
   /* ---- Scroll-reveal --------------------------------------------------- */
+  // Automatische stagger: kinderen van grids onthullen trapsgewijs,
+  // zonder dat elke kaart een handmatige data-delay nodig heeft.
+  const staggerParents = document.querySelectorAll(
+    ".diensten-grid, .usp-grid, .quotes, .projects-grid, .steps, .services-overview, .mini-steps"
+  );
+  staggerParents.forEach((parent) => {
+    [...parent.children].forEach((child, i) => {
+      const el = child.classList.contains("reveal") ? child : child.querySelector(":scope > .reveal");
+      if (el) el.style.transitionDelay = (i * 0.12) + "s";
+    });
+  });
+
   const items = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window) || !items.length) {
     items.forEach((el) => el.classList.add("is-visible"));
@@ -42,7 +54,7 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.22, rootMargin: "0px 0px -5% 0px" }
     );
     items.forEach((el) => io.observe(el));
   }

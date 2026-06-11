@@ -78,20 +78,20 @@
           <div class="reveal">
             <form id="offerte-form" class="wizard" novalidate>
               <div class="wsteps" aria-hidden="true">
-                <div class="wsteps__item is-active">1. Project</div>
-                <div class="wsteps__item">2. Woning</div>
-                <div class="wsteps__item">3. Gegevens</div>
+                <div class="wsteps__item is-active"><span class="wsteps__n">1</span>Project</div>
+                <div class="wsteps__item"><span class="wsteps__n">2</span>Woning</div>
+                <div class="wsteps__item"><span class="wsteps__n">3</span>Gegevens</div>
               </div>
 
               <!-- STAP 1: PROJECT -->
               <fieldset class="wizard__step is-active" style="border:none;padding:0;margin:0">
                 <h2 class="wizard__title">Waarvoor wenst u een offerte?</h2>
                 <div class="choice-grid" role="radiogroup" aria-label="Type werken">
-                  <label class="choice"><input type="radio" name="dienst" value="Isolatie" required /><span>Isolatie</span></label>
-                  <label class="choice"><input type="radio" name="dienst" value="Renovatie" /><span>Renovatie</span></label>
-                  <label class="choice"><input type="radio" name="dienst" value="Gevelbekleding" /><span>Gevelbekleding</span></label>
-                  <label class="choice"><input type="radio" name="dienst" value="Dakwerken" /><span>Dakwerken</span></label>
-                  <label class="choice"><input type="radio" name="dienst" value="Andere" /><span>Andere / combinatie</span></label>
+                  <label class="choice"><input type="radio" name="dienst" value="Isolatie" required /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 9h18M3 14h18M5 5h14M5 19h14" stroke-linecap="round"/></svg>Isolatie</span></label>
+                  <label class="choice"><input type="radio" name="dienst" value="Renovatie" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 21h18M5 21V10l7-5 7 5v11" stroke-linecap="round" stroke-linejoin="round"/></svg>Renovatie</span></label>
+                  <label class="choice"><input type="radio" name="dienst" value="Gevelbekleding" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v16H4zM4 9h16M4 14h16M9 4v5M14 9v5M9 14v6" stroke-linejoin="round"/></svg>Gevelbekleding</span></label>
+                  <label class="choice"><input type="radio" name="dienst" value="Dakwerken" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 12 12 4l10 8M5 10v10h14V10" stroke-linecap="round" stroke-linejoin="round"/></svg>Dakwerken</span></label>
+                  <label class="choice"><input type="radio" name="dienst" value="Andere" /><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8" stroke-linecap="round"/></svg>Andere / combinatie</span></label>
                 </div>
                 <div class="field">
                   <label for="omschrijving">Omschrijf kort uw project *</label>
@@ -99,7 +99,12 @@
                 </div>
                 <div class="field">
                   <label for="fotos">Foto's van de huidige situatie (optioneel)</label>
-                  <input id="fotos" name="fotos" type="file" accept="image/*" multiple />
+                  <label class="file-drop">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 16V4m0 0 4 4m-4-4-4 4M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>Klik om foto's te kiezen <small>of sleep ze hiernaartoe</small></span>
+                    <span class="file-count"></span>
+                    <input id="fotos" name="fotos" type="file" accept="image/*" multiple />
+                  </label>
                 </div>
                 <div class="wizard__nav">
                   <span></span>
@@ -187,7 +192,7 @@
             <div class="info-card">
               <h3>Liever even bellen of mailen?</h3>
               <ul class="info-list">
-                <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke-linejoin="round"/></svg></span><span><span class="lbl">Telefoon</span><br><span class="val todo">+32 (TODO)</span></span></li>
+                <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke-linejoin="round"/></svg></span><span><span class="lbl">Telefoon</span><br><span class="val">Nummer volgt</span><!-- TODO: telefoonnummer --></span></li>
                 <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18v12H3zM3 7l9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="lbl">E-mail</span><br><a class="val" href="mailto:info@noah.be">info@noah.be</a></span></li>
               </ul>
               <p style="margin-top:1rem"><a class="arrow-link" href="contact.html">Alle contactgegevens <span class="arrow">&rarr;</span></a></p>
@@ -208,12 +213,12 @@
           <p class="footer__tag">Wij helpen uw woning vooruit met vakkundige isolatie, renovatie, gevel- en dakwerken in regio Antwerpen.</p>
         </div>
         <div class="footer__col"><h4>Diensten</h4><ul><li><a href="diensten-isolatie.html">Isolatie</a></li><li><a href="diensten-renovatie.html">Renovatie</a></li><li><a href="diensten-gevelbekleding.html">Gevelbekleding</a></li><li><a href="diensten-dakwerken.html">Dakwerken</a></li></ul></div>
-        <div class="footer__col"><h4>Contact</h4><ul><li><a href="mailto:info@noah.be">info@noah.be</a></li><li><span class="todo">Tel: +32 (TODO)</span></li><li><span>Antwerpen, Belgi&euml;</span></li><li><a href="https://www.instagram.com/noahbvba/" target="_blank" rel="noopener">@noahbvba</a></li></ul></div>
+        <div class="footer__col"><h4>Contact</h4><ul><li><a href="mailto:info@noah.be">info@noah.be</a></li><!-- TODO: telefoonnummer toevoegen --><li><span>Antwerpen, Belgi&euml;</span></li><li><a href="https://www.instagram.com/noahbvba/" target="_blank" rel="noopener">@noahbvba</a></li></ul></div>
         <div class="footer__col"><h4>Volg ons</h4><div class="socials"><a href="https://www.instagram.com/noahbvba/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3 1-3 3v2H8v3h3v6h3v-6h2.5l.5-3H14v-1.5c0-.5.3-1 1-1z"/></svg></a></div></div>
       </div>
       <div class="footer__bottom">
         <nav><a href="index.html">Home</a><a href="over-ons.html">Over ons</a><a href="diensten.html">Diensten</a><a href="realisaties.html">Realisaties</a><a href="offerte.html">Offerte</a><a href="contact.html">Contact</a></nav>
-        <span>Antwerpen, Belgi&euml; &mdash; <span class="todo">BTW BE0&hellip; (TODO)</span></span>
+        <span>Antwerpen, Belgi&euml;<!-- TODO: BTW-nummer toevoegen --></span>
       </div>
       <div class="footer__legal">
         <span>&copy; <span data-year>2026</span> NOAH Isolatie &amp; Renovatie &mdash; alle rechten voorbehouden</span>
@@ -222,6 +227,8 @@
       </div>
     </div>
   </footer>
+
+  <div class="m-cta"><a class="btn btn--primary" href="offerte.html">Offerte aanvragen <span class="arrow">&rarr;</span></a></div>
 
   <button class="to-top" aria-label="Terug naar boven">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 14 6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
