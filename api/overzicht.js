@@ -14,20 +14,24 @@ import { safeEqual } from "../lib/auth.js";
 
 export default {
   async fetch(request) {
-    if (request.method !== "POST") {
-      return Response.json({ error: "Method not allowed" }, { status: 405 });
-    }
-
     const passcode = process.env.SITE_PASSCODE;
     if (!passcode) {
       return Response.json({ error: "Server niet geconfigureerd" }, { status: 500 });
     }
 
+    /* POST met JSON-body (check-nieuw.mjs) of GET met ?code=
+       (voor clients die geen POST kunnen sturen, zoals de Claude-app). */
     let supplied = "";
-    try {
-      supplied = String((await request.json()).code ?? "");
-    } catch {
-      return Response.json({ error: "Ongeldige aanvraag" }, { status: 400 });
+    if (request.method === "GET") {
+      supplied = new URL(request.url).searchParams.get("code") ?? "";
+    } else if (request.method === "POST") {
+      try {
+        supplied = String((await request.json()).code ?? "");
+      } catch {
+        return Response.json({ error: "Ongeldige aanvraag" }, { status: 400 });
+      }
+    } else {
+      return Response.json({ error: "Method not allowed" }, { status: 405 });
     }
 
     if (!safeEqual(supplied, passcode)) {
