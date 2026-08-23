@@ -2,19 +2,17 @@
    Run: node update-pages.mjs                                                */
 import { readFile, writeFile } from "node:fs/promises";
 
-const WA = `  <!-- TODO: vervang 32400000000 door het echte WhatsApp-nummer -->
-  <a class="wa-float" href="https://wa.me/32400000000" target="_blank" rel="noopener" aria-label="Chat met NOAH via WhatsApp">
+const WA = `  <a class="wa-float" href="https://wa.me/32498838363" target="_blank" rel="noopener" aria-label="Chat met NOAH via WhatsApp">
     <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5 2.3 7L4 29l7.3-2.3c1.9 1 4 1.6 6.2 1.6 6.6 0 12-5.3 12-11.9 0-3.2-1.3-6.2-3.5-8.4C23.7 4.7 20.7 3 16 3zm0 21.8c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.3 1.4 1.4-4.2-.3-.4c-1.1-1.6-1.7-3.5-1.7-5.5 0-5.5 4.5-9.9 10-9.9 2.7 0 5.2 1 7 2.9 1.9 1.9 2.9 4.4 2.9 7 .1 5.4-4.4 9.9-9.9 9.9zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg>
   </a>
 
   <script src="js/main.js"></script>`;
 
-const og = (title, desc, path, img) => `  <!-- TODO: vervang noah-isolatie.be door het echte domein zodra gekend -->
-  <link rel="canonical" href="https://noah-isolatie.be/${path}" />
+const og = (title, desc, path, img) => `  <link rel="canonical" href="https://noahbouw.be/${path}" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="${title}" />
   <meta property="og:description" content="${desc}" />
-  <meta property="og:image" content="https://noah-isolatie.be/assets/img/${img}" />
+  <meta property="og:image" content="https://noahbouw.be/assets/img/${img}" />
   <meta property="og:locale" content="nl_BE" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />`;
 

@@ -6,7 +6,7 @@ const TOTOP = `  <button class="to-top" aria-label="Terug naar boven">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 14 6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
 
-  <!-- TODO: vervang 32400000000 door het echte WhatsApp-nummer -->`;
+  <a class="wa-float" href="https://wa.me/32498838363" target="_blank" rel="noopener" aria-label="Chat met NOAH via WhatsApp">`;
 
 const plus = `<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span>`;
 
@@ -87,7 +87,7 @@ for (const file of files) {
 
   // to-top knop vóór de WhatsApp-knop
   if (!html.includes("to-top")) {
-    html = html.replace("  <!-- TODO: vervang 32400000000 door het echte WhatsApp-nummer -->", TOTOP);
+    html = html.replace('  <a class="wa-float" href="https://wa.me/32498838363" target="_blank" rel="noopener" aria-label="Chat met NOAH via WhatsApp">', TOTOP);
   }
 
   if (file === "index.html") {

@@ -34,9 +34,15 @@ assets/img/                     logo + foto's (tijdelijke stockbeelden)
 - `generate-pages.mjs` — genereert de 4 dienst-detailpagina's uit data + template
 - `server.mjs` — lichte lokale dev-server
 
+## Bedrijfsgegevens
+- **NOAH BV** — BTW BE 0883.247.653 (ondernemingsnummer 0883.247.653)
+- Pietje Waasstraat 31, 2070 Zwijndrecht
+- Tel. / WhatsApp: 0498 83 83 63 — info@noahbouw.be
+- Domein: `noahbouw.be` (canonical, OG, sitemap, robots.txt)
+
 ## Nog in te vullen (TODO's, gemarkeerd in de code)
-- Telefoon- / WhatsApp-nummer, BTW/KBO, exact adres
-- Echt domein (nu `noah-isolatie.be` als placeholder in canonical/OG/sitemap)
+- Domein `noahbouw.be` koppelen aan het Vercel-project + mailbox `info@noahbouw.be` aanmaken
+- Openingsuren bevestigen met NOAH
 - Formulier-backend koppelen (bv. Web3Forms) voor contact + offerte
 - Echte projectfoto's en klantenreviews
 - Privacy- en cookiepagina's

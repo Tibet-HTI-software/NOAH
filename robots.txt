@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO: vervang noah-isolatie.be door het echte domein
-Sitemap: https://noah-isolatie.be/sitemap.xml
+Sitemap: https://noahbouw.be/sitemap.xml

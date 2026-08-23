@@ -35,12 +35,12 @@ const FOOTER = `<footer class="footer">
           <p class="footer__tag">Wij helpen uw woning vooruit met vakkundige isolatie, renovatie, gevel- en dakwerken in regio Antwerpen.</p>
         </div>
         <div class="footer__col"><h4>Diensten</h4><ul><li><a href="diensten-isolatie.html">Isolatie</a></li><li><a href="diensten-renovatie.html">Renovatie</a></li><li><a href="diensten-gevelbekleding.html">Gevelbekleding</a></li><li><a href="diensten-dakwerken.html">Dakwerken</a></li></ul></div>
-        <div class="footer__col"><h4>Contact</h4><ul><li><a href="mailto:info@noah.be">info@noah.be</a></li><li><span class="todo">Tel: +32 (TODO)</span></li><li><span>Antwerpen, Belgi&euml;</span></li><li><a href="https://www.instagram.com/noahbvba/" target="_blank" rel="noopener">@noahbvba</a></li></ul></div>
+        <div class="footer__col"><h4>Contact</h4><ul><li><a href="mailto:info@noahbouw.be">info@noahbouw.be</a></li><li><a href="tel:+32498838363">0498 83 83 63</a></li><li><span>Antwerpen, Belgi&euml;</span></li><li><a href="https://www.instagram.com/noahbvba/" target="_blank" rel="noopener">@noahbvba</a></li></ul></div>
         <div class="footer__col"><h4>Volg ons</h4><div class="socials"><a href="https://www.instagram.com/noahbvba/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3 1-3 3v2H8v3h3v6h3v-6h2.5l.5-3H14v-1.5c0-.5.3-1 1-1z"/></svg></a></div></div>
       </div>
       <div class="footer__bottom">
         <nav><a href="index.html">Home</a><a href="over-ons.html">Over ons</a><a href="diensten.html">Diensten</a><a href="realisaties.html">Realisaties</a><a href="contact.html">Contact</a></nav>
-        <span>Antwerpen, Belgi&euml; &mdash; <span class="todo">BTW BE0&hellip; (TODO)</span></span>
+        <span>NOAH BV &middot; Pietje Waasstraat 31, 2070 Zwijndrecht &middot; BTW BE 0883.247.653</span>
       </div>
       <div class="footer__legal">
         <span>&copy; <span data-year>2026</span> NOAH Isolatie &amp; Renovatie &mdash; alle rechten voorbehouden</span>
