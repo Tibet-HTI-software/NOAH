@@ -13,3 +13,6 @@ desktop.ini
 
 # Node (mocht er ooit tooling bijkomen)
 node_modules/
+
+# Lokale checkstatus klant-inzendingen (per machine)
+.nieuw-check.json

@@ -15,6 +15,7 @@ import { COOKIE, readCookie, verifyToken } from "./lib/auth.js";
 const OPEN_PATHS = new Set([
   "/maintenance.html",
   "/api/unlock",
+  "/api/overzicht", // doet eigen passcode-controle (zie api/overzicht.js)
   "/favicon.ico",
   "/robots.txt",
   "/assets/img/favicon.svg",

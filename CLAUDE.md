@@ -45,6 +45,24 @@ Vercel-nameservers — dan ligt de mail plat.
   `klant/inzendingen/`. Bekijken: Vercel → Storage → store **`noah-uploads`**
   (public, regio fra1).
 
+## Bij het begin van ELKE werksessie: check op nieuwe inzendingen
+
+Draai als allereerste stap:
+
+```bash
+node check-nieuw.mjs <toegangscode>
+```
+
+Het script vraagt aan de live site wat er nieuw in de Blob-opslag staat sinds de
+vorige check op deze machine, en toont nieuwe foto's en tekst/wijzigingsverzoeken
+van de klant (inclusief een preview van de inhoud). **Meld het resultaat altijd
+aan de gebruiker** — ook als er niets nieuws is (dan volstaat één zin).
+
+De toegangscode is niet in de repo opgeslagen (publieke repo). Vraag hem aan de
+gebruiker of kijk in Vercel → project `noah` → Settings → Environment Variables →
+`SITE_PASSCODE`. Tip voor de gebruiker: zet hem één keer als env-var `NOAH_CODE`,
+dan werkt `node check-nieuw.mjs` zonder argument.
+
 ## Werkafspraken voor deze codebase
 
 - De vier `diensten-*.html` worden **gegenereerd** door `generate-pages.mjs`.
