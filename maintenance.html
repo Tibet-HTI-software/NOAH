@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Binnenkort online — NOAH Isolatie &amp; Renovatie</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      padding: var(--gutter);
+      position: relative;
+      overflow: hidden;
+    }
+    /* zachte groene gloed, zelfde sfeer als de site-hero */
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .35;
+      pointer-events: none;
+    }
+    body::before { width: 480px; height: 480px; background: var(--green-100); top: -160px; right: -120px; }
+    body::after  { width: 380px; height: 380px; background: var(--lime);      bottom: -140px; left: -110px; opacity: .18; }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: min(460px, 100%);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+    }
+    .card__logo { height: 56px; margin-bottom: 1.5rem; }
+    .card__eyebrow {
+      display: inline-block;
+      font-size: var(--fs-eyebrow);
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--green-700);
+      background: var(--green-50);
+      border: 1px solid var(--green-100);
+      border-radius: var(--radius-pill);
+      padding: .45rem 1rem;
+      margin-bottom: 1.25rem;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.4vw, 1.9rem);
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: .75rem;
+    }
+    .card__lead { color: var(--muted); font-size: var(--fs-small); line-height: 1.65; margin-bottom: 1.75rem; }
+
+    .unlock { display: flex; flex-direction: column; gap: .75rem; }
+    .unlock input {
+      font: inherit;
+      text-align: center;
+      letter-spacing: .35em;
+      font-weight: 600;
+      padding: .9rem 1rem;
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--ink);
+      outline: none;
+      transition: border-color var(--t-fast), box-shadow var(--t-fast);
+    }
+    .unlock input:focus { border-color: var(--green); box-shadow: 0 0 0 4px var(--green-50); }
+    .unlock input::placeholder { letter-spacing: .05em; font-weight: 400; color: var(--muted); }
+
+    .unlock button {
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      border: 0;
+      border-radius: var(--radius-pill);
+      padding: .95rem 1.5rem;
+      color: var(--on-green);
+      background: var(--grad-green);
+      box-shadow: var(--shadow-green);
+      transition: transform var(--t-fast), filter var(--t-fast);
+    }
+    .unlock button:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .unlock button:disabled { opacity: .6; cursor: wait; transform: none; }
+
+    .unlock__error {
+      min-height: 1.25rem;
+      font-size: var(--fs-small);
+      color: #B42318;
+      opacity: 0;
+      transition: opacity var(--t-fast);
+    }
+    .unlock__error.show { opacity: 1; }
+    .card.shake { animation: shake .4s var(--ease); }
+    @keyframes shake {
+      20%, 60% { transform: translateX(-7px); }
+      40%, 80% { transform: translateX(7px); }
+    }
+
+    .card__contact {
+      margin-top: 1.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed var(--line);
+      font-size: var(--fs-small);
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .card__contact a { color: var(--green-700); font-weight: 600; text-decoration: none; }
+    .card__contact a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main class="card" id="card">
+    <img class="card__logo" src="assets/img/logo.png" alt="NOAH Isolatie &amp; Renovatie" />
+    <span class="card__eyebrow">Binnenkort online</span>
+    <h1>Wij leggen de laatste hand aan onze nieuwe website</h1>
+    <p class="card__lead">
+      NOAH Isolatie &amp; Renovatie is bijna klaar om u online te verwelkomen.
+      Heeft u een toegangscode? Vul die hieronder in om alvast een kijkje te nemen.
+    </p>
+
+    <form class="unlock" id="unlock" autocomplete="off">
+      <input type="password" id="code" name="code" inputmode="text"
+             placeholder="Toegangscode" aria-label="Toegangscode" required />
+      <button type="submit" id="submit">Bekijk de website</button>
+      <p class="unlock__error" id="error" role="alert" aria-live="polite">&nbsp;</p>
+    </form>
+
+    <p class="card__contact">
+      Nu al een vraag of offerte?<br />
+      <a href="tel:+32498838363">0498 83 83 63</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:info@noahbouw.be">info@noahbouw.be</a>
+    </p>
+  </main>
+
+  <script>
+    const form = document.getElementById("unlock");
+    const card = document.getElementById("card");
+    const codeEl = document.getElementById("code");
+    const errorEl = document.getElementById("error");
+    const submitEl = document.getElementById("submit");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorEl.classList.remove("show");
+      submitEl.disabled = true;
+      submitEl.textContent = "Even geduld…";
+      try {
+        const res = await fetch("/api/unlock", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code: codeEl.value }),
+        });
+        if (res.ok) {
+          location.replace("/");
+          return;
+        }
+        errorEl.textContent = res.status === 401
+          ? "Die code klopt niet — probeer het opnieuw."
+          : "Er ging iets mis. Probeer het zo nog eens.";
+        errorEl.classList.add("show");
+        card.classList.remove("shake");
+        void card.offsetWidth; /* herstart de animatie */
+        card.classList.add("shake");
+        codeEl.select();
+      } catch {
+        errorEl.textContent = "Geen verbinding — controleer uw internet.";
+        errorEl.classList.add("show");
+      } finally {
+        submitEl.disabled = false;
+        submitEl.textContent = "Bekijk de website";
+      }
+    });
+  </script>
+</body>
+</html>

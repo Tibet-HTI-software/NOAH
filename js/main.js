@@ -131,6 +131,28 @@
     toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   }
 
+  /* ---- Klantpaneel-knop (alleen zichtbaar na inloggen via de gate) ----- */
+  if (/(?:^|;\s*)noah_in=1(?:;|$)/.test(document.cookie) && !location.pathname.endsWith("paneel.html")) {
+    const paneel = document.createElement("a");
+    paneel.href = "paneel.html";
+    paneel.className = "paneel-float";
+    paneel.setAttribute("aria-label", "Materiaal aanleveren");
+    paneel.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4m0 0 4 4m-4-4L8 8M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Materiaal aanleveren</span>';
+    const stijl = document.createElement("style");
+    stijl.textContent = [
+      ".paneel-float{position:fixed;left:1.25rem;bottom:1.25rem;z-index:60;display:flex;align-items:center;gap:.55rem;",
+      "padding:.7rem 1.1rem;border-radius:999px;background:var(--surface,#fff);color:var(--green-700,#137A37);",
+      "border:1.5px solid var(--green-100,#D6EEDD);box-shadow:var(--shadow,0 14px 40px rgba(20,24,26,.10));",
+      "font-weight:600;font-size:.85rem;text-decoration:none;transition:transform .2s,box-shadow .2s}",
+      ".paneel-float:hover{transform:translateY(-2px)}",
+      ".paneel-float svg{width:18px;height:18px}",
+      "@media(max-width:640px){.paneel-float span{display:none}.paneel-float{padding:.7rem}}",
+    ].join("");
+    document.head.append(stijl);
+    document.body.append(paneel);
+  }
+
   /* ---- Jaartal in footer ---------------------------------------------- */
   const y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();

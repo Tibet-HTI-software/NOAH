@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materiaal aanleveren — NOAH Isolatie &amp; Renovatie</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--ink); min-height: 100vh; }
+
+    .top {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      padding: 1rem var(--gutter);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      position: sticky; top: 0; z-index: 5;
+    }
+    .top img { height: 40px; }
+    .top a {
+      font-size: var(--fs-small); font-weight: 600; color: var(--green-700);
+      text-decoration: none; padding: .55rem 1.1rem;
+      border: 1.5px solid var(--green-100); border-radius: var(--radius-pill);
+      background: var(--green-50); transition: background var(--t-fast);
+    }
+    .top a:hover { background: var(--green-100); }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: clamp(2rem, 5vw, 3.5rem) var(--gutter) 5rem; }
+    .intro h1 { font-family: var(--font-display); font-size: var(--fs-h2); margin-bottom: .6rem; }
+    .intro p { color: var(--muted); line-height: 1.7; max-width: 56ch; }
+
+    .kaart {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+      padding: clamp(1.5rem, 4vw, 2.25rem); margin-top: 2rem;
+    }
+    .kaart h2 {
+      font-family: var(--font-display); font-size: var(--fs-h3);
+      display: flex; align-items: center; gap: .6rem; margin-bottom: .4rem;
+    }
+    .kaart h2 .dot {
+      width: 34px; height: 34px; flex: 0 0 34px; border-radius: 12px;
+      display: grid; place-items: center;
+      background: var(--green-50); color: var(--green-700);
+    }
+    .kaart h2 .dot svg { width: 18px; height: 18px; }
+    .kaart > p { color: var(--muted); font-size: var(--fs-small); line-height: 1.65; margin-bottom: 1.25rem; }
+
+    label { display: block; font-size: var(--fs-small); font-weight: 600; margin: 1rem 0 .4rem; }
+    label small { font-weight: 400; color: var(--muted); }
+    textarea, select, input[type="text"] {
+      width: 100%; font: inherit; font-size: var(--fs-small);
+      padding: .8rem 1rem; border: 1.5px solid var(--line); border-radius: var(--radius);
+      background: var(--bg); color: var(--ink); outline: none; resize: vertical;
+      transition: border-color var(--t-fast), box-shadow var(--t-fast);
+    }
+    textarea:focus, select:focus, input[type="text"]:focus {
+      border-color: var(--green); box-shadow: 0 0 0 4px var(--green-50);
+    }
+    textarea { min-height: 110px; line-height: 1.6; }
+
+    .drop {
+      border: 2px dashed var(--line); border-radius: var(--radius);
+      background: var(--bg); padding: 2rem 1.25rem; text-align: center;
+      color: var(--muted); font-size: var(--fs-small); cursor: pointer;
+      transition: border-color var(--t-fast), background var(--t-fast);
+    }
+    .drop.is-over, .drop:hover { border-color: var(--green); background: var(--green-50); }
+    .drop strong { color: var(--green-700); }
+    .drop input { display: none; }
+
+    .filelist { list-style: none; margin-top: 1rem; display: grid; gap: .5rem; }
+    .filelist li {
+      display: flex; align-items: center; gap: .75rem;
+      font-size: var(--fs-small); background: var(--bg);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      padding: .6rem .9rem;
+    }
+    .filelist .naam { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .filelist .status { font-weight: 600; color: var(--muted); white-space: nowrap; }
+    .filelist li.ok .status { color: var(--green-700); }
+    .filelist li.fout .status { color: #B42318; }
+
+    .knop {
+      font: inherit; font-weight: 600; cursor: pointer; border: 0;
+      border-radius: var(--radius-pill); padding: .85rem 1.6rem; margin-top: 1.25rem;
+      color: var(--on-green); background: var(--grad-green); box-shadow: var(--shadow-green);
+      transition: transform var(--t-fast), filter var(--t-fast), opacity var(--t-fast);
+    }
+    .knop:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .knop:disabled { opacity: .55; cursor: wait; transform: none; }
+
+    .melding {
+      margin-top: .9rem; font-size: var(--fs-small); font-weight: 600;
+      min-height: 1.3rem; opacity: 0; transition: opacity var(--t-fast);
+    }
+    .melding.show { opacity: 1; }
+    .melding.goed { color: var(--green-700); }
+    .melding.fout { color: #B42318; }
+
+    .hulp {
+      margin-top: 2.5rem; text-align: center;
+      font-size: var(--fs-small); color: var(--muted); line-height: 1.7;
+    }
+    .hulp a { color: var(--green-700); font-weight: 600; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <img src="assets/img/logo.png" alt="NOAH" />
+    <a href="/">&larr; Terug naar de website</a>
+  </header>
+
+  <main class="wrap">
+    <div class="intro">
+      <h1>Materiaal aanleveren</h1>
+      <p>Welkom! Via deze pagina kunt u foto's, teksten en opmerkingen doorgeven
+         voor uw nieuwe website. Alles wat u hier instuurt komt rechtstreeks bij
+         ons terecht — u hoeft verder niets te doen.</p>
+    </div>
+
+    <!-- ============ FOTO'S ============ -->
+    <section class="kaart">
+      <h2><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10.5" r="1.6"/><path d="m5 17 4.2-4.2a1.5 1.5 0 0 1 2.1 0L17 18.5M14.5 15l1.7-1.7a1.5 1.5 0 0 1 2.1 0L21 16" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Projectfoto's</h2>
+      <p>Foto's van uitgevoerde werken: isolatie, gevels, daken, renovaties.
+         Hoe meer, hoe beter — wij kiezen de mooiste voor de website.
+         U kunt meerdere foto's tegelijk selecteren.</p>
+
+      <label for="fotoOmschrijving">Waar zijn deze foto's van? <small>(bijv. "dakrenovatie Kapellen 2025")</small></label>
+      <input type="text" id="fotoOmschrijving" placeholder="Korte omschrijving" maxlength="120" />
+
+      <label style="margin-top:1rem">Foto's kiezen</label>
+      <div class="drop" id="drop">
+        <strong>Klik hier</strong> of sleep uw foto's in dit vak<br />
+        <span>JPG, PNG of PDF — max. 25&nbsp;MB per bestand</span>
+        <input type="file" id="bestanden" multiple accept="image/jpeg,image/png,image/webp,image/heic,image/heif,application/pdf" />
+      </div>
+      <ul class="filelist" id="filelist"></ul>
+      <p class="melding" id="fotoMelding">&nbsp;</p>
+    </section>
+
+    <!-- ============ TEKSTEN ============ -->
+    <section class="kaart">
+      <h2><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10" stroke-linecap="round"/></svg></span>Teksten voor de website</h2>
+      <p>Drie dingen waar wij uw hulp bij nodig hebben. Vul in wat u kunt —
+         het hoeft niet perfect geschreven te zijn, wij maken er nette webtekst van.</p>
+
+      <form id="tekstenForm">
+        <label for="verhaal">Uw bedrijfsverhaal <small>(voor de "Over ons"-pagina: hoe is NOAH ontstaan, wat maakt u anders?)</small></label>
+        <textarea id="verhaal" placeholder="Vertel in uw eigen woorden…"></textarea>
+
+        <label for="uren">Openingsuren <small>(wanneer bent u bereikbaar?)</small></label>
+        <textarea id="uren" style="min-height:80px" placeholder="Bijv. ma–do 8:00–17:00, vr tot 16:00, za op afspraak"></textarea>
+
+        <label for="reviews">Reacties van tevreden klanten <small>(naam + wat ze zeiden, mag uit WhatsApp of mail komen)</small></label>
+        <textarea id="reviews" placeholder="Bijv. 'Prachtig werk geleverd, netjes opgeruimd' — familie Peeters, Brasschaat"></textarea>
+
+        <button class="knop" type="submit">Teksten versturen</button>
+        <p class="melding" id="tekstenMelding">&nbsp;</p>
+      </form>
+    </section>
+
+    <!-- ============ WIJZIGINGEN ============ -->
+    <section class="kaart">
+      <h2><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Iets dat anders moet?</h2>
+      <p>Ziet u op de website iets dat u wilt laten aanpassen — een zin, een foto,
+         een prijs, wat dan ook? Laat het hier weten.</p>
+
+      <form id="wijzigingForm">
+        <label for="pagina">Over welke pagina gaat het?</label>
+        <select id="pagina">
+          <option value="Home">Home</option>
+          <option value="Over ons">Over ons</option>
+          <option value="Diensten">Diensten (overzicht)</option>
+          <option value="Isolatie">Dienst: Isolatie</option>
+          <option value="Renovatie">Dienst: Renovatie</option>
+          <option value="Gevelbekleding">Dienst: Gevelbekleding</option>
+          <option value="Dakwerken">Dienst: Dakwerken</option>
+          <option value="Realisaties">Realisaties</option>
+          <option value="Offerte">Offerte-pagina</option>
+          <option value="Contact">Contact</option>
+          <option value="Algemeen">Algemeen / weet ik niet</option>
+        </select>
+
+        <label for="bericht">Wat moet er anders?</label>
+        <textarea id="bericht" placeholder="Beschrijf zo duidelijk mogelijk wat u wilt veranderen…"></textarea>
+
+        <button class="knop" type="submit">Verzoek versturen</button>
+        <p class="melding" id="wijzigingMelding">&nbsp;</p>
+      </form>
+    </section>
+
+    <p class="hulp">
+      Lukt iets niet? Bel of app gerust naar
+      <a href="tel:+32498838363">0498 83 83 63</a> — dan helpen we u verder.
+    </p>
+  </main>
+
+  <script type="module">
+    import { upload } from "https://esm.sh/@vercel/blob@1.1.1/client";
+
+    /* ---------- helpers ---------- */
+    const $ = (id) => document.getElementById(id);
+    const toon = (el, tekst, goed) => {
+      el.textContent = tekst;
+      el.classList.remove("goed", "fout");
+      el.classList.add("show", goed ? "goed" : "fout");
+      if (goed) setTimeout(() => el.classList.remove("show"), 6000);
+    };
+
+    /* ---------- foto-upload ---------- */
+    const drop = $("drop"), input = $("bestanden"), lijst = $("filelist");
+
+    drop.addEventListener("click", () => input.click());
+    drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("is-over"); });
+    drop.addEventListener("dragleave", () => drop.classList.remove("is-over"));
+    drop.addEventListener("drop", (e) => {
+      e.preventDefault(); drop.classList.remove("is-over");
+      verwerk([...e.dataTransfer.files]);
+    });
+    input.addEventListener("change", () => { verwerk([...input.files]); input.value = ""; });
+
+    async function verwerk(files) {
+      const omschrijving = $("fotoOmschrijving").value.trim()
+        .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "algemeen";
+
+      for (const file of files) {
+        if (file.size > 25 * 1024 * 1024) {
+          voegToe(file.name, "te groot (max 25 MB)", "fout");
+          continue;
+        }
+        const rij = voegToe(file.name, "bezig… 0%");
+        try {
+          await upload(`${omschrijving}/${file.name}`, file, {
+            access: "public",
+            handleUploadUrl: "/api/upload",
+            onUploadProgress: ({ percentage }) => {
+              rij.querySelector(".status").textContent = `bezig… ${Math.round(percentage)}%`;
+            },
+          });
+          rij.classList.add("ok");
+          rij.querySelector(".status").textContent = "ontvangen ✓";
+        } catch (err) {
+          rij.classList.add("fout");
+          rij.querySelector(".status").textContent = "mislukt";
+          toon($("fotoMelding"), "Eén of meer foto's konden niet worden geüpload. Probeer het opnieuw of app ze naar 0498 83 83 63.", false);
+        }
+      }
+    }
+
+    function voegToe(naam, status, klasse) {
+      const li = document.createElement("li");
+      if (klasse) li.classList.add(klasse);
+      li.innerHTML = `<span class="naam"></span><span class="status"></span>`;
+      li.querySelector(".naam").textContent = naam;
+      li.querySelector(".status").textContent = status;
+      lijst.append(li);
+      return li;
+    }
+
+    /* ---------- formulieren ---------- */
+    async function verstuur(payload, knop, melding, leegmaken) {
+      knop.disabled = true;
+      try {
+        const res = await fetch("/api/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok) {
+          toon(melding, "Verstuurd — bedankt! Wij gaan ermee aan de slag.", true);
+          leegmaken();
+        } else {
+          toon(melding, data.error || "Versturen mislukt, probeer het opnieuw.", false);
+        }
+      } catch {
+        toon(melding, "Geen verbinding — probeer het zo nog eens.", false);
+      } finally {
+        knop.disabled = false;
+      }
+    }
+
+    $("tekstenForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      verstuur(
+        {
+          type: "teksten",
+          bedrijfsverhaal: $("verhaal").value,
+          openingsuren: $("uren").value,
+          reviews: $("reviews").value,
+        },
+        e.submitter, $("tekstenMelding"),
+        () => { $("verhaal").value = ""; $("uren").value = ""; $("reviews").value = ""; }
+      );
+    });
+
+    $("wijzigingForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      verstuur(
+        { type: "wijziging", pagina: $("pagina").value, bericht: $("bericht").value },
+        e.submitter, $("wijzigingMelding"),
+        () => { $("bericht").value = ""; }
+      );
+    });
+  </script>
+</body>
+</html>

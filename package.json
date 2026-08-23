@@ -1,0 +1,9 @@
+{
+  "name": "noah-website",
+  "private": true,
+  "type": "module",
+  "description": "NOAH Isolatie & Renovatie — statische site + maintenance-gate en klantpaneel (Vercel Functions)",
+  "dependencies": {
+    "@vercel/blob": "^1.1.1"
+  }
+}
