@@ -41,7 +41,7 @@ assets/img/                     logo + foto's (tijdelijke stockbeelden)
 - Domein: `noahbouw.be` (canonical, OG, sitemap, robots.txt)
 
 ## Nog in te vullen (TODO's, gemarkeerd in de code)
-- Domein `noahbouw.be` koppelen aan het Vercel-project + mailbox `info@noahbouw.be` aanmaken
+- Mailbox `info@noahbouw.be` aanmaken (Microsoft 365-tenant staat klaar, mailbox nog niet)
 - Openingsuren bevestigen met NOAH
 - Formulier-backend koppelen (bv. Web3Forms) voor contact + offerte
 - Echte projectfoto's en klantenreviews
