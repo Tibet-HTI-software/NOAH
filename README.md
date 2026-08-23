@@ -40,8 +40,11 @@ assets/img/                     logo + foto's (tijdelijke stockbeelden)
 - Tel. / WhatsApp: 0498 83 83 63 — info@noahbouw.be
 - Domein: `noahbouw.be` (canonical, OG, sitemap, robots.txt)
 
+## Maintenance-gate & klantpaneel
+- Site staat achter een toegangscode (env `SITE_PASSCODE`); uitzetten = env `MAINTENANCE_MODE` op `off` + redeploy
+- Klantpaneel op `/paneel.html`: foto's -> Blob `klant/fotos/`, teksten/verzoeken -> `klant/inzendingen/` (Vercel -> Storage -> noah-uploads)
+
 ## Nog in te vullen (TODO's, gemarkeerd in de code)
-- Mailbox `info@noahbouw.be` aanmaken (Microsoft 365-tenant staat klaar, mailbox nog niet)
 - Openingsuren bevestigen met NOAH
 - Formulier-backend koppelen (bv. Web3Forms) voor contact + offerte
 - Echte projectfoto's en klantenreviews
